@@ -39,7 +39,7 @@ double Vector::LenVector() const
 	return lenVector;
 }
 
-Vector Vector::Sum(const Vector& v) const
+Vector Vector::Sum(Vector& v) const
 {
 	return Vector('-', x + v.x, y + v.y, z + v.z);
 }
@@ -59,4 +59,11 @@ double Vector::CosVectors(const Vector& v) const
 	if ((LenVector() == 0) || (v.LenVector() == 0))
 		std::cout << "Один из векторов нулевой!";
 	return (double)Mult(v) / (LenVector() * v.LenVector());
+}
+
+void SetCordinatesVector(Vector& v, double new_x, double new_y, double new_z)
+{
+	v.x = new_x;
+	v.y = new_y;
+	v.z = new_z;
 }

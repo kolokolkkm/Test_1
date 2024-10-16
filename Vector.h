@@ -26,7 +26,7 @@ public:
 	double LenVector() const;
 
 	/*Сумма векторов*/
-	Vector Sum(const Vector& v) const;
+	Vector Sum(Vector& v) const;
 
 	/*Вычитание векторов*/
 	Vector Dif(const Vector& v) const;
@@ -36,4 +36,7 @@ public:
 
 	/*Косинус угла между векторами*/
 	double CosVectors(const Vector& v) const;
+
+	/*Смена значений координат вектора*/
+	friend void SetCordinatesVector(Vector& v, double new_x, double new_y, double new_z);
 };

@@ -7,7 +7,7 @@ void print_menu_item(char item) {
 	cout << "Выбран " << item << " пункт меню\n";
 }
 
-Vector search_vector_in_array_of_name(const vector<Vector> &vectors, char name_vector)
+static Vector search_vector_in_array_of_name(const vector<Vector> &vectors, char name_vector)
 {
 	for (int i = 0; i < vectors.size(); i++)
 	{
