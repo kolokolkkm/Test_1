@@ -8,6 +8,11 @@ Vector::Vector(char input_name_vector, double input_x, double input_y, double in
 	++count_v;
 }
 
+Vector Vector::operator=(const Vector& v) const
+{
+	return *this;
+}
+
 double Vector::GetX() const
 {
 	return x;
@@ -61,9 +66,30 @@ double Vector::CosVectors(const Vector& v) const
 	return (double)Mult(v) / (LenVector() * v.LenVector());
 }
 
+Vector Vector::operator+(const Vector& v) const
+{
+	return Vector('-', x + v.x, y + v.y, z + v.z);
+}
+
+double Vector::operator*(const Vector& v) const
+{
+	return (x * v.x + y * v.y + z * v.z);
+}
+
+Vector operator*(const Vector& v, double m)
+{
+	return Vector('-', v.GetX() * m, v.GetY() * m, v.GetZ() * m);
+}
+
 void SetCordinatesVector(Vector& v, double new_x, double new_y, double new_z)
 {
 	v.x = new_x;
 	v.y = new_y;
 	v.z = new_z;
+}
+void SetCordinatesVector(Vector& v_1, Vector& v_2)
+{
+	v_1.x = v_2.GetX();
+	v_1.y = v_2.GetY();
+	v_1.z = v_2.GetZ();
 }
