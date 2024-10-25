@@ -2,7 +2,7 @@
 #include "Vector.h"
 #include <vector>
 using namespace std;
-
+/*Необходимо для красивого вывода координат вектора*/
 std::ostream& operator<<(std::ostream& stream, const Vector& v)
 {
 	stream << "{" << v.GetX() << ", " << v.GetY() << ", " << v.GetZ() << "}\n";

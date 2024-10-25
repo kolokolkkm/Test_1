@@ -1,13 +1,14 @@
 #pragma once
-
+/*Это файл с обьявлением методов класса*/
 class Vector
 {
-private:
+protected:
 	char name_vector;
 	double x;
 	double y;
 	double z;
-	static inline unsigned count_v = 0; //inline используется для обхода правила одного определения
+	static inline unsigned count_v = 0; //inline используется для обхода правила одного определения, Будник может за это спросить, лучше в инете прочитать
+
 public:
 	/*Конструктор*/
 	Vector(char input_name_vector = '-', double input_x = 0, double input_y = 0, double input_z = 0);
@@ -52,6 +53,15 @@ public:
 	/*Переопределение оператора +*/
 	Vector operator +(const Vector& v) const;
 
-	/*Перегрузка оператора */
+	/*Переопределение оператора */
 	double operator *(const Vector& v) const;
+};
+/*Дочерний класс для 5+ лаб*/
+class BazisVector : public Vector
+{
+private:
+	char axis;
+public:
+	using Vector::Vector;
+	BazisVector(char input_name_vector, double len, char axis);
 };

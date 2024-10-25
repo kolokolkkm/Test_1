@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Vector.h"
 #include <cmath>
-
+/*Файл с определением методов класса*/
 Vector::Vector(char input_name_vector, double input_x, double input_y, double input_z)
 	:name_vector(input_name_vector), x(input_x), y(input_y), z(input_z)
 {
@@ -92,4 +92,22 @@ void SetCordinatesVector(Vector& v_1, Vector& v_2)
 	v_1.x = v_2.GetX();
 	v_1.y = v_2.GetY();
 	v_1.z = v_2.GetZ();
+}
+/*Конструктор дочернего класса*/
+BazisVector::BazisVector(char input_name_vector, double len, char axis):Vector(input_name_vector)
+{
+	switch (axis)
+	{
+	default:
+		break;
+	case 'x':
+		this->x = len;
+			break;
+	case 'y':
+		this->y = len;
+		break;
+	case 'z':
+		this->z = len;
+		break;
+	}
 }
