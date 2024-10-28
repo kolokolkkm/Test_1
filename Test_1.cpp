@@ -2,7 +2,7 @@
 #include "Vector.h"
 #include <vector>
 using namespace std;
-/*Необходимо для красивого вывода координат вектора*/
+
 std::ostream& operator<<(std::ostream& stream, const Vector& v)
 {
 	stream << "{" << v.GetX() << ", " << v.GetY() << ", " << v.GetZ() << "}\n";
@@ -13,17 +13,22 @@ void print_menu_item(char item) {
 	cout << "Выбран " << item << " пункт меню\n";
 }
 
-static int search_index_vector_in_array_of_name(const vector<Vector> &vectors, char name_vector)
+static int search_index_vector_in_array_of_name(const vector<Vector*> &vectors, char name_vector)
 {
+	int searched = -1;
 	for (int i = 0; i < vectors.size(); i++)
 	{
-		if (vectors[i].GetNameVector() == name_vector)
+		if (vectors[i]->GetNameVector() == name_vector)
 		{
 			return i;
+			searched = 0;
 			break;
 		}
 	}
+	if (searched == -1)
+		return searched;
 }
+
 
 bool check_vectors_count(int num_v)
 {
@@ -38,7 +43,7 @@ int main()
 	char choice;
 	bool close = false;
 	setlocale(LC_ALL, "RU");
-	std::vector<Vector> vectors;
+	std::vector<Vector*> vectors;
 	while (close == false) 
 	{
 		cout << "Выберите действие:\n";
@@ -57,16 +62,45 @@ int main()
 			cout << "Введеные данные не соответствуют пунктам меню!\n";
 			continue;
 			case '1':
-				char name_vector;
-				double x, y, z;
 				print_menu_item(choice);
-				cout << "Введите имя будущего вектора:\n";
-				cin >> name_vector;
-				cout << "Введите координаты X, Y, Z для будущего вектора\n";
-				cin >> x >> y >> z;
-				vectors.push_back(Vector {name_vector, x, y, z });
-				cout << "Вектор " << name_vector << " = {" << x << ", " << y << ", " << z << "} создан!\n";
-				continue;
+				char choice_1;
+				cout << "Выберите, какой вектор создать:\n";
+				cout << "1. Обычный;\n";
+				cout << "2. Базисный:\n";
+				cin >> choice_1;
+				switch (choice_1)
+				{
+				default:
+					break;
+				case '1':
+				{
+					char name_vector_1;
+					double x, y, z;
+					cout << "Введите имя будущего вектора:\n";
+					cin >> name_vector_1;
+					cout << "Введите координаты X, Y, Z для будущего вектора\n";
+					cin >> x >> y >> z;
+					Vector v_add = Vector{ name_vector_1, x, y, z };
+					vectors.push_back(&v_add);
+					cout << "Вектор " << name_vector_1 << " = {" << x << ", " << y << ", " << z << "} создан!\n";
+					continue;
+				}
+				case '2':
+				{
+					char name_vector_2, axis;
+					double len;
+					cout << "Введите имя будущего вектора:\n";
+					cin >> name_vector_2;
+					cout << "Введите длину вектора:\n";
+					cin >> len;
+					cout << "Введите ось вектора:\n";
+					cin >> axis;
+					BazisVector bv_add = BazisVector{ name_vector_2, len, axis };
+					vectors.push_back(&bv_add);
+					cout << "Создан базисный вектор " << name_vector_2 << " = " << bv_add;
+					continue;
+				}
+				}
 			case '2':
 				print_menu_item(choice);
 				if (not(check_vectors_count(1)))
@@ -74,13 +108,13 @@ int main()
 					cout << "Нет созданных векторов!\n";
 					continue;
 				}
-				else 
+				else
 				{
 					char name_search;
 					cout << "Введите имя интересующего вектора:\n";
 					cin >> name_search;
-					Vector vector_search = vectors[search_index_vector_in_array_of_name(vectors, name_search)];
-					cout << "Координаты вектора " << name_search << " = " << vector_search;
+					Vector* vector_search = vectors[search_index_vector_in_array_of_name(vectors, name_search)];
+					cout << "Координаты вектора " << name_search << " = " << &vector_search;
 				}
 				continue;
 			case '3':
@@ -95,12 +129,12 @@ int main()
 					char name_1, name_2;
 					cout << "Введите имена суммируемых векторов:\n";
 					cin >> name_1 >> name_2;
-					Vector vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
+					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
 					cout << "Выполняется сложение следующих векторов:\n";
-					cout << name_1 << " = " << vector_1;
-					cout << name_2 << " = " << vector_2;
-					Vector result = vector_1 + vector_2;
+					cout << name_1 << " = " << *vector_1;
+					cout << name_2 << " = " << *vector_2;
+					Vector result = vector_1->Sum(*vector_2);
 					cout << name_1 << " + " << name_2 << " = " << result;
 				}
 				continue;
@@ -118,12 +152,12 @@ int main()
 					cin >> name_1;
 					cout << "Введите имя вычитаемого вектора:\n";
 					cin >> name_2;
-					Vector vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
+					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
 					cout << "Выполняется вычитание следующих векторов:\n";
-					cout << name_1 << " = " << vector_1;
-					cout << name_2 << " = " << vector_2;
-					Vector result = vector_1.Dif(vector_2);
+					cout << name_1 << " = " << *vector_1;
+					cout << name_2 << " = " << *vector_2;
+					Vector result = *vector_1 - *vector_2;
 					cout << name_1 << " - " << name_2 << " = " << result;
 				}
 				continue;
@@ -139,12 +173,12 @@ int main()
 					char name_1, name_2;
 					cout << "Введите имена перемножаемых векторов:\n";
 					cin >> name_1 >> name_2;
-					Vector vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
+					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
 					cout << "Вычисляется скалярное произведение следующих векторов:\n";
-					cout << name_1 << " = " << vector_1;
-					cout << name_2 << " = " << vector_2;
-					double result = vector_1 * vector_2;
+					cout << name_1 << " = " << *vector_1;
+					cout << name_2 << " = " << *vector_2;
+					double result = (*vector_1) * (*vector_2);
 					cout << name_1 << " * " << name_2 << " = " << result << "\n";
 				}
 				continue;
@@ -160,12 +194,12 @@ int main()
 					char name_1, name_2;
 					cout << "Введите имена интересующих векторов:\n";
 					cin >> name_1 >> name_2;
-					Vector vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
+					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
 					cout << "Вычисляется косинус угла между следующими векторами:\n";
 					cout << name_1 << " = " << vector_1;
 					cout << name_2 << " = " << vector_2;
-					double result = vector_1.CosVectors(vector_2);
+					double result = (*vector_1).CosVectors(*vector_2);
 					cout << "Cos = " << result << "\n";
 					continue;
 				}
@@ -193,7 +227,7 @@ int main()
 						double new_x, new_y, new_z;
 						cout << "Введите имя вектора, координаты которого требуется сменить:\n";
 						cin >> name;
-						Vector* vector_searched = &vectors[search_index_vector_in_array_of_name(vectors, name)];
+						Vector* vector_searched = vectors[search_index_vector_in_array_of_name(vectors, name)];
 						cout << "Введите новые координаты X, Y, Z для вектора:\n";
 						cin >> new_x >> new_y >> new_z;
 						SetCordinatesVector(*vector_searched, new_x, new_y, new_z);
@@ -212,10 +246,10 @@ int main()
 							char name_2;
 							cout << "Введите имя вектора, координаты которого требуется сменить:\n";
 							cin >> name;
-							Vector* vector_searched_1 = &vectors[search_index_vector_in_array_of_name(vectors, name)];
+							Vector* vector_searched_1 = vectors[search_index_vector_in_array_of_name(vectors, name)];
 							cout << "Введите имя вектора, координаты которого заимствуются:\n";
 							cin >> name_2;
-							Vector* vector_searched_2 = &vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+							Vector* vector_searched_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
 							SetCordinatesVector(*vector_searched_1, *vector_searched_2);
 							cout << "Координаты вектора " << name << " изменены на " << *vector_searched_2;
 							continue;

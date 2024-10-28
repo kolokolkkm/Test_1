@@ -1,5 +1,5 @@
 #pragma once
-/*Это файл с обьявлением методов класса*/
+
 class Vector
 {
 protected:
@@ -7,7 +7,7 @@ protected:
 	double x;
 	double y;
 	double z;
-	static inline unsigned count_v = 0; //inline используется для обхода правила одного определения, Будник может за это спросить, лучше в инете прочитать
+	static inline unsigned count_v = 0; //inline используется для обхода правила одного определения
 
 public:
 	/*Конструктор*/
@@ -35,10 +35,10 @@ public:
 	double LenVector() const;
 
 	/*Сумма векторов*/
-	Vector Sum(Vector& v) const;
+	virtual Vector Sum(const Vector& v) const;
 
 	/*Вычитание векторов*/
-	Vector Dif(const Vector& v) const;
+	virtual Vector Dif(const Vector& v) const;
 
 	/*Скалярное произведение*/
 	double Mult(const Vector& v) const;
@@ -55,13 +55,27 @@ public:
 
 	/*Переопределение оператора */
 	double operator *(const Vector& v) const;
+
+	/*Переопределение оператора -*/
+	Vector operator -(const Vector& v) const;
 };
-/*Дочерний класс для 5+ лаб*/
+
 class BazisVector : public Vector
 {
 private:
 	char axis;
 public:
+	/*Конструктор от базового класса*/
 	using Vector::Vector;
+
+	/*Уникальный конструктор дочернего класса*/
 	BazisVector(char input_name_vector, double len, char axis);
-};
+
+	/*Получение имени оси*/
+	char GetAxis() const;
+
+	/*Переопределение виртуальных функции*/
+	Vector Sum(const Vector& v) const override;
+
+	Vector Dif(const Vector& v) const;
+}; 

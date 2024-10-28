@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Vector.h"
 #include <cmath>
-/*Файл с определением методов класса*/
+
 Vector::Vector(char input_name_vector, double input_x, double input_y, double input_z)
 	:name_vector(input_name_vector), x(input_x), y(input_y), z(input_z)
 {
@@ -15,17 +15,17 @@ Vector Vector::operator=(const Vector& v) const
 
 double Vector::GetX() const
 {
-	return x;
+	return this->x;
 }
 
 double Vector::GetY() const
 {
-	return y;
+	return this->y;
 }
 
 double Vector::GetZ() const
 {
-	return z;
+	return this->z;
 }
 
 char Vector::GetNameVector() const
@@ -44,7 +44,7 @@ double Vector::LenVector() const
 	return lenVector;
 }
 
-Vector Vector::Sum(Vector& v) const
+Vector Vector::Sum(const Vector& v) const
 {
 	return Vector('-', x + v.x, y + v.y, z + v.z);
 }
@@ -76,6 +76,11 @@ double Vector::operator*(const Vector& v) const
 	return (x * v.x + y * v.y + z * v.z);
 }
 
+Vector Vector::operator-(const Vector& v) const
+{
+	return Vector('-', x - v.x, y - v.y, z - v.z);
+}
+
 Vector operator*(const Vector& v, double m)
 {
 	return Vector('-', v.GetX() * m, v.GetY() * m, v.GetZ() * m);
@@ -96,18 +101,61 @@ void SetCordinatesVector(Vector& v_1, Vector& v_2)
 /*Конструктор дочернего класса*/
 BazisVector::BazisVector(char input_name_vector, double len, char axis):Vector(input_name_vector)
 {
+	this->axis = axis;
 	switch (axis)
 	{
 	default:
 		break;
-	case 'x':
+	case'x':
 		this->x = len;
-			break;
+		break;
 	case 'y':
 		this->y = len;
 		break;
 	case 'z':
 		this->z = len;
+		break;
+	}
+}
+char BazisVector::GetAxis() const
+{
+	return axis;
+}
+
+Vector BazisVector::Sum(const Vector& v) const
+{
+	//std::cout << "Используется виртуальная функций:\n";
+	switch (axis)
+	{
+	default:
+		break;
+	case'x':
+		return Vector('-', v.GetX() + GetX(), v.GetY(), v.GetZ());
+		break;
+	case 'y':
+		return Vector('-', v.GetX(), v.GetY() + GetY(), v.GetZ());
+		break;
+	case 'z':
+		return Vector('-', v.GetX(), v.GetY(), v.GetZ() + GetZ());
+		break;
+	}
+}
+
+Vector BazisVector::Dif(const Vector& v) const
+{
+	//std::cout << "Используется виртуальная функций:\n";
+	switch (axis)
+	{
+	default:
+		break;
+	case'x':
+		return Vector('-', -v.GetX() - GetX(), -v.GetY(), -v.GetZ());
+		break;
+	case 'y':
+		return Vector('-', -v.GetX(), -v.GetY() - GetY(), -v.GetZ());
+		break;
+	case 'z':
+		return Vector('-', -v.GetX(), -v.GetY(), -v.GetZ() - GetZ());
 		break;
 	}
 }
