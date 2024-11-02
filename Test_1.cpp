@@ -2,7 +2,7 @@
 #include "Vector.h"
 #include <vector>
 using namespace std;
-/*Добавление коментария для проверки git*/
+
 std::ostream& operator<<(std::ostream& stream, const Vector<double>& v)
 {
 	stream << "{" << v.GetX() << ", " << v.GetY() << ", " << v.GetZ() << "}\n";
@@ -13,10 +13,9 @@ void print_menu_item(char item) {
 	cout << "Выбран " << item << " пункт меню\n";
 }
 
-template <typename T>
 bool check_vectors_count(int num_v)
 {
-	if ((num_v - Vector<T>::GetCountVectors()) > 0)
+	if ((num_v - Vector<double>::GetCountVectors()) > 0)
 		return false;
 	else
 		return true;
@@ -87,7 +86,7 @@ int main()
 				}
 			case '2':
 				print_menu_item(choice);
-				if (not(check_vectors_count<int>(1)))
+				if (not(check_vectors_count(1)))
 				{
 					cout << "Нет созданных векторов!\n";
 					continue;
@@ -99,13 +98,13 @@ int main()
 					cout << "Введите имя интересующего вектора:\n";
 					cin >> name_search;
 					i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name_search);
-					Vector<double>* vector_search = vectors[i_src];
-					cout << "Координаты вектора " << name_search << " = " << &vector_search;
+					Vector<double> vector_search = *vectors[i_src];
+					cout << "Координаты вектора " << name_search << " = " << vector_search;
 				}
 				continue;
 			case '3':
 				print_menu_item(choice);
-				if (not(check_vectors_count<int>(2)))
+				if (not(check_vectors_count(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -129,7 +128,7 @@ int main()
 				continue;
 			case '4':
 				print_menu_item(choice);
-				if (not(check_vectors_count<int>(2)))
+				if (not(check_vectors_count(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -155,7 +154,7 @@ int main()
 				continue;
 			case '5':
 				print_menu_item(choice);
-				if (not(check_vectors_count<int>(2)))
+				if (not(check_vectors_count(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -179,7 +178,7 @@ int main()
 				continue;
 			case '6':
 				print_menu_item(choice);
-				if (not(check_vectors_count<int>(2)))
+				if (not(check_vectors_count(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -203,7 +202,7 @@ int main()
 				}
 			case '7':
 				print_menu_item(choice);
-				if (not(check_vectors_count<int>(1)))
+				if (not(check_vectors_count(1)))
 				{
 					cout << "Нет созданных векторов!\n";
 					continue;
@@ -235,7 +234,7 @@ int main()
 					}
 					case '2':
 					{
-						if (not(check_vectors_count<int>(2)))
+						if (not(check_vectors_count(2)))
 						{
 							cout << "Недостаточно создано векторов для проведения операции!\n";
 							continue;

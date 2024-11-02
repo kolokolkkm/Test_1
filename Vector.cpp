@@ -39,7 +39,7 @@ char Vector<Type>::GetNameVector() const
 	return this->name_vector;
 }
 
-int Vector<int>::GetCountVectors()
+int Vector<double>::GetCountVectors()
 {
 	return count_v;
 }
