@@ -2,8 +2,8 @@
 #include "Vector.h"
 #include <vector>
 using namespace std;
-
-std::ostream& operator<<(std::ostream& stream, const Vector& v)
+/*Добавление коментария для проверки git*/
+std::ostream& operator<<(std::ostream& stream, const Vector<double>& v)
 {
 	stream << "{" << v.GetX() << ", " << v.GetY() << ", " << v.GetZ() << "}\n";
 	return stream;
@@ -13,26 +13,10 @@ void print_menu_item(char item) {
 	cout << "Выбран " << item << " пункт меню\n";
 }
 
-static int search_index_vector_in_array_of_name(const vector<Vector*> &vectors, char name_vector)
-{
-	int searched = -1;
-	for (int i = 0; i < vectors.size(); i++)
-	{
-		if (vectors[i]->GetNameVector() == name_vector)
-		{
-			return i;
-			searched = 0;
-			break;
-		}
-	}
-	if (searched == -1)
-		return searched;
-}
-
-
+template <typename T>
 bool check_vectors_count(int num_v)
 {
-	if ((num_v - (int)Vector::GetCountVectors()) > 0)
+	if ((num_v - Vector<T>::GetCountVectors()) > 0)
 		return false;
 	else
 		return true;
@@ -43,7 +27,7 @@ int main()
 	char choice;
 	bool close = false;
 	setlocale(LC_ALL, "RU");
-	std::vector<Vector*> vectors;
+	std::vector<Vector<double>*> vectors;
 	while (close == false) 
 	{
 		cout << "Выберите действие:\n";
@@ -103,7 +87,7 @@ int main()
 				}
 			case '2':
 				print_menu_item(choice);
-				if (not(check_vectors_count(1)))
+				if (not(check_vectors_count<int>(1)))
 				{
 					cout << "Нет созданных векторов!\n";
 					continue;
@@ -111,15 +95,17 @@ int main()
 				else
 				{
 					char name_search;
+					int i_src;
 					cout << "Введите имя интересующего вектора:\n";
 					cin >> name_search;
-					Vector* vector_search = vectors[search_index_vector_in_array_of_name(vectors, name_search)];
+					i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name_search);
+					Vector<double>* vector_search = vectors[i_src];
 					cout << "Координаты вектора " << name_search << " = " << &vector_search;
 				}
 				continue;
 			case '3':
 				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
+				if (not(check_vectors_count<int>(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -127,10 +113,13 @@ int main()
 				else
 				{
 					char name_1, name_2;
+					int i_1, i_2;
 					cout << "Введите имена суммируемых векторов:\n";
 					cin >> name_1 >> name_2;
-					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double>* vector_1 = vectors[i_1];
+					Vector<double>* vector_2 = vectors[i_2];
 					cout << "Выполняется сложение следующих векторов:\n";
 					cout << name_1 << " = " << *vector_1;
 					cout << name_2 << " = " << *vector_2;
@@ -140,7 +129,7 @@ int main()
 				continue;
 			case '4':
 				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
+				if (not(check_vectors_count<int>(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -148,22 +137,25 @@ int main()
 				else
 				{
 					char name_1, name_2;
+					int i_1, i_2;
 					cout << "Введите имя уменьшаемого вектора:\n";
 					cin >> name_1;
 					cout << "Введите имя вычитаемого вектора:\n";
 					cin >> name_2;
-					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double>* vector_1 = vectors[i_1];
+					Vector<double>* vector_2 = vectors[i_2];
 					cout << "Выполняется вычитание следующих векторов:\n";
 					cout << name_1 << " = " << *vector_1;
 					cout << name_2 << " = " << *vector_2;
-					Vector result = *vector_1 - *vector_2;
+					Vector<double> result = *vector_1 - *vector_2;
 					cout << name_1 << " - " << name_2 << " = " << result;
 				}
 				continue;
 			case '5':
 				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
+				if (not(check_vectors_count<int>(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -173,8 +165,11 @@ int main()
 					char name_1, name_2;
 					cout << "Введите имена перемножаемых векторов:\n";
 					cin >> name_1 >> name_2;
-					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					int i_1, i_2;
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double>* vector_1 = vectors[i_1];
+					Vector<double>* vector_2 = vectors[i_2];
 					cout << "Вычисляется скалярное произведение следующих векторов:\n";
 					cout << name_1 << " = " << *vector_1;
 					cout << name_2 << " = " << *vector_2;
@@ -184,7 +179,7 @@ int main()
 				continue;
 			case '6':
 				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
+				if (not(check_vectors_count<int>(2)))
 				{
 					cout << "Недостаточно создано векторов для проведения операции!\n";
 					continue;
@@ -194,8 +189,11 @@ int main()
 					char name_1, name_2;
 					cout << "Введите имена интересующих векторов:\n";
 					cin >> name_1 >> name_2;
-					Vector* vector_1 = vectors[search_index_vector_in_array_of_name(vectors, name_1)];
-					Vector* vector_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+					int i_1, i_2;
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double>* vector_1 = vectors[i_1];
+					Vector<double>* vector_2 = vectors[i_2];
 					cout << "Вычисляется косинус угла между следующими векторами:\n";
 					cout << name_1 << " = " << vector_1;
 					cout << name_2 << " = " << vector_2;
@@ -205,7 +203,7 @@ int main()
 				}
 			case '7':
 				print_menu_item(choice);
-				if (not(check_vectors_count(1)))
+				if (not(check_vectors_count<int>(1)))
 				{
 					cout << "Нет созданных векторов!\n";
 					continue;
@@ -227,7 +225,8 @@ int main()
 						double new_x, new_y, new_z;
 						cout << "Введите имя вектора, координаты которого требуется сменить:\n";
 						cin >> name;
-						Vector* vector_searched = vectors[search_index_vector_in_array_of_name(vectors, name)];
+						int i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+						Vector<double>* vector_searched = vectors[i_src];
 						cout << "Введите новые координаты X, Y, Z для вектора:\n";
 						cin >> new_x >> new_y >> new_z;
 						SetCordinatesVector(*vector_searched, new_x, new_y, new_z);
@@ -236,7 +235,7 @@ int main()
 					}
 					case '2':
 					{
-						if (not(check_vectors_count(2)))
+						if (not(check_vectors_count<int>(2)))
 						{
 							cout << "Недостаточно создано векторов для проведения операции!\n";
 							continue;
@@ -246,10 +245,12 @@ int main()
 							char name_2;
 							cout << "Введите имя вектора, координаты которого требуется сменить:\n";
 							cin >> name;
-							Vector* vector_searched_1 = vectors[search_index_vector_in_array_of_name(vectors, name)];
+							int i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+							Vector<double>* vector_searched_1 = vectors[i_1];
 							cout << "Введите имя вектора, координаты которого заимствуются:\n";
 							cin >> name_2;
-							Vector* vector_searched_2 = vectors[search_index_vector_in_array_of_name(vectors, name_2)];
+							int i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+							Vector<double>* vector_searched_2 = vectors[i_2];
 							SetCordinatesVector(*vector_searched_1, *vector_searched_2);
 							cout << "Координаты вектора " << name << " изменены на " << *vector_searched_2;
 							continue;

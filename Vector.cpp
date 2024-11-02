@@ -1,103 +1,128 @@
 #include <iostream>
+#include <vector>
 #include "Vector.h"
 #include <cmath>
 
-Vector::Vector(char input_name_vector, double input_x, double input_y, double input_z)
+template<typename Type>
+Vector<Type>::Vector(char input_name_vector, Type input_x, Type input_y, Type input_z)
 	:name_vector(input_name_vector), x(input_x), y(input_y), z(input_z)
 {
 	++count_v;
 }
-
-Vector Vector::operator=(const Vector& v) const
+template<typename Type>
+Vector<Type>& Vector<Type>::operator=(const Vector& v) const
 {
 	return *this;
 }
 
-double Vector::GetX() const
+template<typename Type>
+Type Vector<Type>::GetX() const
 {
 	return this->x;
 }
 
-double Vector::GetY() const
+template<typename Type>
+Type Vector<Type>::GetY() const
 {
 	return this->y;
 }
 
-double Vector::GetZ() const
+template<typename Type>
+Type Vector<Type>::GetZ() const
 {
 	return this->z;
 }
 
-char Vector::GetNameVector() const
+template<typename Type>
+char Vector<Type>::GetNameVector() const
 {
-	return name_vector;
+	return this->name_vector;
 }
 
-int Vector::GetCountVectors()
+int Vector<int>::GetCountVectors()
 {
 	return count_v;
 }
 
-double Vector::LenVector() const
+template<typename Type>
+Type Vector<Type>::LenVector() const
 {
 	double lenVector = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
 	return lenVector;
 }
 
-Vector Vector::Sum(const Vector& v) const
+template<typename Type>
+Vector<Type> Vector<Type>::Sum(const Vector& v) const
 {
 	return Vector('-', x + v.x, y + v.y, z + v.z);
 }
 
-Vector Vector::Dif(const Vector& v) const
+template<typename Type>
+Vector<Type> Vector<Type>::Dif(const Vector& v) const
 {
 	return Vector('-', x - v.x, y - v.y, z - v.z);
 }
 
-double Vector::Mult(const Vector& v) const
+template<typename Type>
+Type Vector<Type>::Mult(const Vector& v) const
 {
 	return (x * v.x + y * v.y + z * v.z);
 }
 
-double Vector::CosVectors(const Vector& v) const
+double Vector<double>::CosVectors(const Vector& v) const
 {
 	if ((LenVector() == 0) || (v.LenVector() == 0))
 		std::cout << "Один из векторов нулевой!";
 	return (double)Mult(v) / (LenVector() * v.LenVector());
 }
 
-Vector Vector::operator+(const Vector& v) const
+template<typename Type>
+Vector<Type>& Vector<Type>::operator+(const Vector& v) const
 {
 	return Vector('-', x + v.x, y + v.y, z + v.z);
 }
 
-double Vector::operator*(const Vector& v) const
+double Vector<double>::operator*(const Vector& v) const
 {
 	return (x * v.x + y * v.y + z * v.z);
 }
 
-Vector Vector::operator-(const Vector& v) const
+Vector<double> Vector<double>::operator-(const Vector& v) const
 {
-	return Vector('-', x - v.x, y - v.y, z - v.z);
+	return Vector<double>('-', x - v.x, y - v.y, z - v.z);
 }
 
-Vector operator*(const Vector& v, double m)
+int Vector<double>::search_index_vector_in_array_of_name(const std::vector<Vector<double>*>& vectors, char name_vector)
 {
-	return Vector('-', v.GetX() * m, v.GetY() * m, v.GetZ() * m);
+	int searched = -1;
+	for (int i = 0; i < vectors.size(); i++)
+	{
+		if (vectors[i]->GetNameVector() == name_vector)
+		{
+			return i;
+			searched = 0;
+			break;
+		}
+	}
+	if (searched == -1)
+		return searched;
 }
 
-void SetCordinatesVector(Vector& v, double new_x, double new_y, double new_z)
+void SetCordinatesVector(Vector<double>& v, double new_x, double new_y, double new_z)
 {
 	v.x = new_x;
 	v.y = new_y;
 	v.z = new_z;
 }
-void SetCordinatesVector(Vector& v_1, Vector& v_2)
+
+void SetCordinatesVector(Vector<double>& v_1, Vector<double>& v_2)
 {
 	v_1.x = v_2.GetX();
 	v_1.y = v_2.GetY();
 	v_1.z = v_2.GetZ();
 }
+
+
 /*Конструктор дочернего класса*/
 BazisVector::BazisVector(char input_name_vector, double len, char axis):Vector(input_name_vector)
 {
@@ -117,12 +142,13 @@ BazisVector::BazisVector(char input_name_vector, double len, char axis):Vector(i
 		break;
 	}
 }
+
 char BazisVector::GetAxis() const
 {
 	return axis;
 }
 
-Vector BazisVector::Sum(const Vector& v) const
+Vector<double> BazisVector::Sum(const Vector& v) const
 {
 	//std::cout << "Используется виртуальная функций:\n";
 	switch (axis)
@@ -141,7 +167,7 @@ Vector BazisVector::Sum(const Vector& v) const
 	}
 }
 
-Vector BazisVector::Dif(const Vector& v) const
+Vector<double> BazisVector::Dif(const Vector& v) const
 {
 	//std::cout << "Используется виртуальная функций:\n";
 	switch (axis)
