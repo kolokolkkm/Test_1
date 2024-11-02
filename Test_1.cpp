@@ -1,4 +1,4 @@
-ï»¿#include <iostream>
+#include <iostream>
 #include "Vector.h"
 #include <vector>
 using namespace std;
@@ -10,7 +10,7 @@ std::ostream& operator<<(std::ostream& stream, const Vector<double>& v)
 }
 
 void print_menu_item(char item) {
-	cout << "Ð’Ñ‹Ð±Ñ€Ð°Ð½ " << item << " Ð¿ÑƒÐ½ÐºÑ‚ Ð¼ÐµÐ½ÑŽ\n";
+	cout << "Âûáðàí " << item << " ïóíêò ìåíþ\n";
 }
 
 bool check_vectors_count(int num_v)
@@ -29,27 +29,27 @@ int main()
 	std::vector<Vector<double>*> vectors;
 	while (close == false) 
 	{
-		cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ:\n";
-		cout << "1. Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð²ÐµÐºÑ‚Ð¾Ñ€;\n";
-		cout << "2. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°;\n";
-		cout << "3. Ð¡Ð»Ð¾Ð¶Ð¸Ñ‚ÑŒ Ð´Ð²Ð° Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°;\n";
-		cout << "4. Ð’Ñ‹Ñ‡ÐµÑÑ‚ÑŒ Ð¸Ð· Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð° Ð´Ñ€ÑƒÐ³Ð¾Ð¹;\n";
-		cout << "5. Ð’Ñ‹Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÑŒ ÑÐºÐ°Ð»ÑÑ€Ð½Ð¾Ðµ Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²;\n";
-		cout << "6. ÐÐ°Ð¹Ñ‚Ð¸ ÐºÐ¾ÑÐ¸Ð½ÑƒÑ ÑƒÐ³Ð»Ð° Ð¼ÐµÐ¶Ð´Ñƒ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°Ð¼Ð¸;\n";
-		cout << "7. Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‰ÐµÐ³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°;\n";
-		cout << "8. Ð’Ñ‹Ð¹Ñ‚Ð¸ Ð¸Ð· Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹.\n";
+		cout << "Âûáåðèòå äåéñòâèå:\n";
+		cout << "1. Ñîçäàòü âåêòîð;\n";
+		cout << "2. Âûâåñòè êîîðäèíàòû âåêòîðà;\n";
+		cout << "3. Ñëîæèòü äâà âåêòîðà;\n";
+		cout << "4. Âû÷åñòü èç îäíîãî âåêòîðà äðóãîé;\n";
+		cout << "5. Âû÷èñëèòü ñêàëÿðíîå ïðîèçâåäåíèå âåêòîðîâ;\n";
+		cout << "6. Íàéòè êîñèíóñ óãëà ìåæäó âåêòîðàìè;\n";
+		cout << "7. Èçìåíèòü êîîðäèíàòû ñóùåñòâóþùåãî âåêòîðà;\n";
+		cout << "8. Âûéòè èç ïðîãðàììû.\n";
 		cin >> choice;
 		switch (choice)
 		{
 		default:
-			cout << "Ð’Ð²ÐµÐ´ÐµÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð½Ðµ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‚ Ð¿ÑƒÐ½ÐºÑ‚Ð°Ð¼ Ð¼ÐµÐ½ÑŽ!\n";
+			cout << "Ââåäåíûå äàííûå íå ñîîòâåòñòâóþò ïóíêòàì ìåíþ!\n";
 			continue;
 			case '1':
 				print_menu_item(choice);
 				char choice_1;
-				cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ, ÐºÐ°ÐºÐ¾Ð¹ Ð²ÐµÐºÑ‚Ð¾Ñ€ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ:\n";
-				cout << "1. ÐžÐ±Ñ‹Ñ‡Ð½Ñ‹Ð¹;\n";
-				cout << "2. Ð‘Ð°Ð·Ð¸ÑÐ½Ñ‹Ð¹:\n";
+				cout << "Âûáåðèòå, êàêîé âåêòîð ñîçäàòü:\n";
+				cout << "1. Îáû÷íûé;\n";
+				cout << "2. Áàçèñíûé:\n";
 				cin >> choice_1;
 				switch (choice_1)
 				{
@@ -59,28 +59,28 @@ int main()
 				{
 					char name_vector_1;
 					double x, y, z;
-					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð±ÑƒÐ´ÑƒÑ‰ÐµÐ³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+					cout << "Ââåäèòå èìÿ áóäóùåãî âåêòîðà:\n";
 					cin >> name_vector_1;
-					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ X, Y, Z Ð´Ð»Ñ Ð±ÑƒÐ´ÑƒÑ‰ÐµÐ³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°\n";
+					cout << "Ââåäèòå êîîðäèíàòû X, Y, Z äëÿ áóäóùåãî âåêòîðà\n";
 					cin >> x >> y >> z;
 					Vector v_add = Vector{ name_vector_1, x, y, z };
 					vectors.push_back(&v_add);
-					cout << "Ð’ÐµÐºÑ‚Ð¾Ñ€ " << name_vector_1 << " = {" << x << ", " << y << ", " << z << "} ÑÐ¾Ð·Ð´Ð°Ð½!\n";
+					cout << "Âåêòîð " << name_vector_1 << " = {" << x << ", " << y << ", " << z << "} ñîçäàí!\n";
 					continue;
 				}
 				case '2':
 				{
 					char name_vector_2, axis;
 					double len;
-					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð±ÑƒÐ´ÑƒÑ‰ÐµÐ³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+					cout << "Ââåäèòå èìÿ áóäóùåãî âåêòîðà:\n";
 					cin >> name_vector_2;
-					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð»Ð¸Ð½Ñƒ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+					cout << "Ââåäèòå äëèíó âåêòîðà:\n";
 					cin >> len;
-					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾ÑÑŒ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+					cout << "Ââåäèòå îñü âåêòîðà:\n";
 					cin >> axis;
 					BazisVector bv_add = BazisVector{ name_vector_2, len, axis };
 					vectors.push_back(&bv_add);
-					cout << "Ð¡Ð¾Ð·Ð´Ð°Ð½ Ð±Ð°Ð·Ð¸ÑÐ½Ñ‹Ð¹ Ð²ÐµÐºÑ‚Ð¾Ñ€ " << name_vector_2 << " = " << bv_add;
+					cout << "Ñîçäàí áàçèñíûé âåêòîð " << name_vector_2 << " = " << bv_add;
 					continue;
 				}
 				}
@@ -89,7 +89,7 @@ int main()
 				print_menu_item(choice);
 				if (not(check_vectors_count(1)))
 				{
-					cout << "ÐÐµÑ‚ ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²!\n";
+					cout << "Íåò ñîçäàííûõ âåêòîðîâ!\n";
 					continue;
 				}
 				else
@@ -98,11 +98,11 @@ int main()
 					{
 						char name_search;
 						int i_src;
-						cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð¸Ð½Ñ‚ÐµÑ€ÐµÑÑƒÑŽÑ‰ÐµÐ³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+						cout << "Ââåäèòå èìÿ èíòåðåñóþùåãî âåêòîðà:\n";
 						cin >> name_search;
 						i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name_search);
 						Vector<double> vector_search = *vectors[i_src];
-						cout << "ÐšÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð° " << name_search << " = " << vector_search;
+						cout << "Êîîðäèíàòû âåêòîðà " << name_search << " = " << vector_search;
 					}
 					catch (const string& error_message) 
 					{
@@ -115,7 +115,7 @@ int main()
 				print_menu_item(choice);
 				if (not(check_vectors_count(2)))
 				{
-					cout << "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÑÐ¾Ð·Ð´Ð°Ð½Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð² Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸!\n";
+					cout << "Íåäîñòàòî÷íî ñîçäàíî âåêòîðîâ äëÿ ïðîâåäåíèÿ îïåðàöèè!\n";
 					continue;
 				}
 				else
@@ -124,13 +124,13 @@ int main()
 					{
 						char name_1, name_2;
 						int i_1, i_2;
-						cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼ÐµÐ½Ð° ÑÑƒÐ¼Ð¼Ð¸Ñ€ÑƒÐµÐ¼Ñ‹Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²:\n";
+						cout << "Ââåäèòå èìåíà ñóììèðóåìûõ âåêòîðîâ:\n";
 						cin >> name_1 >> name_2;
 						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
 						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
 						Vector<double>* vector_1 = vectors[i_1];
 						Vector<double>* vector_2 = vectors[i_2];
-						cout << "Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ÑÑ ÑÐ»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²:\n";
+						cout << "Âûïîëíÿåòñÿ ñëîæåíèå ñëåäóþùèõ âåêòîðîâ:\n";
 						cout << name_1 << " = " << *vector_1;
 						cout << name_2 << " = " << *vector_2;
 						Vector result = vector_1->Sum(*vector_2);
@@ -147,7 +147,7 @@ int main()
 				print_menu_item(choice);
 				if (not(check_vectors_count(2)))
 				{
-					cout << "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÑÐ¾Ð·Ð´Ð°Ð½Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð² Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸!\n";
+					cout << "Íåäîñòàòî÷íî ñîçäàíî âåêòîðîâ äëÿ ïðîâåäåíèÿ îïåðàöèè!\n";
 					continue;
 				}
 				else
@@ -156,15 +156,15 @@ int main()
 					{
 						char name_1, name_2;
 						int i_1, i_2;
-						cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ ÑƒÐ¼ÐµÐ½ÑŒÑˆÐ°ÐµÐ¼Ð¾Ð³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+						cout << "Ââåäèòå èìÿ óìåíüøàåìîãî âåêòîðà:\n";
 						cin >> name_1;
-						cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð²Ñ‹Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼Ð¾Ð³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+						cout << "Ââåäèòå èìÿ âû÷èòàåìîãî âåêòîðà:\n";
 						cin >> name_2;
 						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
 						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
 						Vector<double>* vector_1 = vectors[i_1];
 						Vector<double>* vector_2 = vectors[i_2];
-						cout << "Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ÑÑ Ð²Ñ‹Ñ‡Ð¸Ñ‚Ð°Ð½Ð¸Ðµ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²:\n";
+						cout << "Âûïîëíÿåòñÿ âû÷èòàíèå ñëåäóþùèõ âåêòîðîâ:\n";
 						cout << name_1 << " = " << *vector_1;
 						cout << name_2 << " = " << *vector_2;
 						Vector<double> result = *vector_1 - *vector_2;
@@ -181,7 +181,7 @@ int main()
 				print_menu_item(choice);
 				if (not(check_vectors_count(2)))
 				{
-					cout << "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÑÐ¾Ð·Ð´Ð°Ð½Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð² Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸!\n";
+					cout << "Íåäîñòàòî÷íî ñîçäàíî âåêòîðîâ äëÿ ïðîâåäåíèÿ îïåðàöèè!\n";
 					continue;
 				}
 				else
@@ -189,7 +189,7 @@ int main()
 					try
 					{
 						char name_1, name_2;
-						cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼ÐµÐ½Ð° Ð¿ÐµÑ€ÐµÐ¼Ð½Ð¾Ð¶Ð°ÐµÐ¼Ñ‹Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²:\n";
+						cout << "Ââåäèòå èìåíà ïåðåìíîæàåìûõ âåêòîðîâ:\n";
 						cin >> name_1 >> name_2;
 						int i_1, i_2;
 						double result;
@@ -207,7 +207,7 @@ int main()
 						}
 						else
 						{
-							cout << "Ð’Ñ‹Ñ‡Ð¸ÑÐ»ÑÐµÑ‚ÑÑ ÑÐºÐ°Ð»ÑÑ€Ð½Ð¾Ðµ Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²:\n";
+							cout << "Âû÷èñëÿåòñÿ ñêàëÿðíîå ïðîèçâåäåíèå ñëåäóþùèõ âåêòîðîâ:\n";
 							cout << name_1 << " = " << *vector_1;
 							cout << name_2 << " = " << *vector_2;
 							result = (*vector_1) * (*vector_2);
@@ -225,7 +225,7 @@ int main()
 				print_menu_item(choice);
 				if (not(check_vectors_count(2)))
 				{
-					cout << "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÑÐ¾Ð·Ð´Ð°Ð½Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð² Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸!\n";
+					cout << "Íåäîñòàòî÷íî ñîçäàíî âåêòîðîâ äëÿ ïðîâåäåíèÿ îïåðàöèè!\n";
 					continue;
 				}
 				else
@@ -233,14 +233,14 @@ int main()
 					try
 					{
 						char name_1, name_2;
-						cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼ÐµÐ½Ð° Ð¸Ð½Ñ‚ÐµÑ€ÐµÑÑƒÑŽÑ‰Ð¸Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²:\n";
+						cout << "Ââåäèòå èìåíà èíòåðåñóþùèõ âåêòîðîâ:\n";
 						cin >> name_1 >> name_2;
 						int i_1, i_2;
 						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
 						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
 						Vector<double>* vector_1 = vectors[i_1];
 						Vector<double>* vector_2 = vectors[i_2];
-						cout << "Ð’Ñ‹Ñ‡Ð¸ÑÐ»ÑÐµÑ‚ÑÑ ÐºÐ¾ÑÐ¸Ð½ÑƒÑ ÑƒÐ³Ð»Ð° Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¼Ð¸ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°Ð¼Ð¸:\n";
+						cout << "Âû÷èñëÿåòñÿ êîñèíóñ óãëà ìåæäó ñëåäóþùèìè âåêòîðàìè:\n";
 						cout << name_1 << " = " << vector_1;
 						cout << name_2 << " = " << vector_2;
 						double result = (*vector_1).CosVectors(*vector_2);
@@ -257,34 +257,34 @@ int main()
 				print_menu_item(choice);
 				if (not(check_vectors_count(1)))
 				{
-					cout << "ÐÐµÑ‚ ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð²!\n";
+					cout << "Íåò ñîçäàííûõ âåêòîðîâ!\n";
 					continue;
 				}
 				else
 				{
 					char choice_set, name;;
-					cout << "ÐšÐ°Ðº ÑÐ¼ÐµÐ½Ð¸Ñ‚ÑŒ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹?\n";
-					cout << "1. Ð’Ð²ÐµÑÑ‚Ð¸ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ ÑÐ°Ð¼Ð¾ÑÑ‚Ð¾ÑÑ‚ÐµÐ»ÑŒÐ½Ð¾;\n";
-					cout << "2. ÐŸÐ¾Ð·Ð°Ð¸Ð¼ÑÑ‚Ð²Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð´Ñ€ÑƒÐ³Ð¾Ð³Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°.\n";
+					cout << "Êàê ñìåíèòü êîîðäèíàòû?\n";
+					cout << "1. Ââåñòè êîîðäèíàòû ñàìîñòîÿòåëüíî;\n";
+					cout << "2. Ïîçàèìñòâîâàòü êîîðäèíàòû äðóãîãî âåêòîðà.\n";
 					cin >> choice_set;
 					switch (choice_set)
 					{
 					default:
-						cout << "Ð’Ð²ÐµÐ´ÐµÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð½Ðµ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‚ Ð¿ÑƒÐ½ÐºÑ‚Ð°Ð¼ Ð¼ÐµÐ½ÑŽ!\n";
+						cout << "Ââåäåíûå äàííûå íå ñîîòâåòñòâóþò ïóíêòàì ìåíþ!\n";
 						continue;
 					case '1':
 					{
 						try
 						{
 							double new_x, new_y, new_z;
-							cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°, ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ ÑÐ¼ÐµÐ½Ð¸Ñ‚ÑŒ:\n";
+							cout << "Ââåäèòå èìÿ âåêòîðà, êîîðäèíàòû êîòîðîãî òðåáóåòñÿ ñìåíèòü:\n";
 							cin >> name;
 							int i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
 							Vector<double>* vector_searched = vectors[i_src];
-							cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ðµ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ X, Y, Z Ð´Ð»Ñ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°:\n";
+							cout << "Ââåäèòå íîâûå êîîðäèíàòû X, Y, Z äëÿ âåêòîðà:\n";
 							cin >> new_x >> new_y >> new_z;
 							SetCordinatesVector(*vector_searched, new_x, new_y, new_z);
-							cout << "ÐšÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð° " << name << " Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ñ‹ Ð½Ð° " << *vector_searched;
+							cout << "Êîîðäèíàòû âåêòîðà " << name << " èçìåíåíû íà " << *vector_searched;
 							continue;
 						}
 						catch (const string& error_message)
@@ -297,7 +297,7 @@ int main()
 					{
 						if (not(check_vectors_count(2)))
 						{
-							cout << "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÑÐ¾Ð·Ð´Ð°Ð½Ð¾ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð¾Ð² Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸!\n";
+							cout << "Íåäîñòàòî÷íî ñîçäàíî âåêòîðîâ äëÿ ïðîâåäåíèÿ îïåðàöèè!\n";
 							continue;
 						}
 						else
@@ -305,16 +305,16 @@ int main()
 							try
 							{
 								char name_2;
-								cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°, ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ ÑÐ¼ÐµÐ½Ð¸Ñ‚ÑŒ:\n";
+								cout << "Ââåäèòå èìÿ âåêòîðà, êîîðäèíàòû êîòîðîãî òðåáóåòñÿ ñìåíèòü:\n";
 								cin >> name;
 								int i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
 								Vector<double>* vector_searched_1 = static_cast<Vector<double>*>(vectors[i_1]);
-								cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð°, ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð·Ð°Ð¸Ð¼ÑÑ‚Ð²ÑƒÑŽÑ‚ÑÑ:\n";
+								cout << "Ââåäèòå èìÿ âåêòîðà, êîîðäèíàòû êîòîðîãî çàèìñòâóþòñÿ:\n";
 								cin >> name_2;
 								int i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
 								Vector<double>* vector_searched_2 = static_cast<Vector<double>*>(vectors[i_2]);
 								SetCordinatesVector(*vector_searched_1, *vector_searched_2);
-								cout << "ÐšÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð²ÐµÐºÑ‚Ð¾Ñ€Ð° " << name << " Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ñ‹ Ð½Ð° " << *vector_searched_2;
+								cout << "Êîîðäèíàòû âåêòîðà " << name << " èçìåíåíû íà " << *vector_searched_2;
 								continue;
 							}
 							catch (const string& error_message) 
@@ -329,7 +329,7 @@ int main()
 				continue;
 			case '8':
 				print_menu_item(choice);
-				cout << "ÐžÑÑƒÑ‰ÐµÑÑ‚Ð²Ð»ÑÐµÑ‚ÑÑ Ð²Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹...";
+				cout << "Îñóùåñòâëÿåòñÿ âûõîä èç ïðîãðàììû...";
 				close = true;
 				continue;
 		}
