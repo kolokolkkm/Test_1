@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-template<typename Type>
+template<typename Type=double>
 class Vector
 {
 protected:
@@ -9,7 +9,7 @@ protected:
 	Type x;
 	Type y;
 	Type z;
-	static inline unsigned count_v = 0; //inline используется для обхода правила одного определения
+	static inline unsigned count_v = 0; //inline используется для обхода ODR
 
 public:
 	/*Конструктор*/
@@ -53,10 +53,11 @@ public:
 	friend void SetCordinatesVector(Vector& v_1, Vector& v_2);
 
 	/*Переопределение оператора +*/
-	Vector& operator +(const Vector& v) const;
+	Vector operator +(const Vector v) const;
 
-	/*Переопределение оператора */
-	double operator *(const Vector& v) const;
+	/*Перегрузки оператора */
+	double operator *(const Vector<double>& v) const;
+	Vector<double> operator *(double m) const;
 
 	/*Переопределение оператора -*/
 	Vector operator -(const Vector& v) const;
@@ -79,8 +80,11 @@ public:
 	/*Получение имени оси*/
 	char GetAxis() const;
 
+	/*Изменение оси*/
+	void SetAxis(char new_axis);
+
 	/*Переопределение виртуальных функции*/
 	Vector Sum(const Vector& v) const override;
 
-	Vector Dif(const Vector& v) const;
+	Vector Dif(const Vector& v) const override;
 }; 

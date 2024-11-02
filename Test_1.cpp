@@ -192,15 +192,27 @@ int main()
 						cout << "Введите имена перемножаемых векторов:\n";
 						cin >> name_1 >> name_2;
 						int i_1, i_2;
+						double result;
 						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
 						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
 						Vector<double>* vector_1 = vectors[i_1];
 						Vector<double>* vector_2 = vectors[i_2];
-						cout << "Вычисляется скалярное произведение следующих векторов:\n";
-						cout << name_1 << " = " << *vector_1;
-						cout << name_2 << " = " << *vector_2;
-						double result = (*vector_1) * (*vector_2);
-						cout << name_1 << " * " << name_2 << " = " << result << "\n";
+						if (!vector_2->LenVector()) 
+						{
+							result = ((*vector_1) * 0).LenVector();
+						}
+						else if (!vector_2->LenVector())
+						{
+							result = ((*vector_2) * 0).LenVector();
+						}
+						else
+						{
+							cout << "Вычисляется скалярное произведение следующих векторов:\n";
+							cout << name_1 << " = " << *vector_1;
+							cout << name_2 << " = " << *vector_2;
+							result = (*vector_1) * (*vector_2);
+							cout << name_1 << " * " << name_2 << " = " << result << "\n";
+						}
 					}
 					catch (const string& error_message)
 					{
@@ -296,20 +308,20 @@ int main()
 								cout << "Введите имя вектора, координаты которого требуется сменить:\n";
 								cin >> name;
 								int i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-								Vector<double>* vector_searched_1 = vectors[i_1];
+								Vector<double>* vector_searched_1 = static_cast<Vector<double>*>(vectors[i_1]);
 								cout << "Введите имя вектора, координаты которого заимствуются:\n";
 								cin >> name_2;
 								int i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-								Vector<double>* vector_searched_2 = vectors[i_2];
+								Vector<double>* vector_searched_2 = static_cast<Vector<double>*>(vectors[i_2]);
 								SetCordinatesVector(*vector_searched_1, *vector_searched_2);
 								cout << "Координаты вектора " << name << " изменены на " << *vector_searched_2;
 								continue;
 							}
-							catch (const string& error_message)
-							{
-								cout << error_message << "\n";
-								continue;
-							}
+							catch (const string& error_message) 
+					{
+						cout << error_message << "\n";
+						continue;
+					}
 						}
 					}
 					}

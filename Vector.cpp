@@ -39,6 +39,7 @@ char Vector<Type>::GetNameVector() const
 	return this->name_vector;
 }
 
+
 int Vector<double>::GetCountVectors()
 {
 	return count_v;
@@ -77,14 +78,20 @@ double Vector<double>::CosVectors(const Vector& v) const
 }
 
 template<typename Type>
-Vector<Type>& Vector<Type>::operator+(const Vector& v) const
+Vector<Type> Vector<Type>::operator+(const Vector v) const
 {
 	return Vector('-', x + v.x, y + v.y, z + v.z);
 }
 
+
 double Vector<double>::operator*(const Vector& v) const
 {
 	return (x * v.x + y * v.y + z * v.z);
+}
+
+Vector<double> Vector<double>::operator*(double m) const
+{
+	return Vector<double>('-', x * m, y * m, z * m);
 }
 
 Vector<double> Vector<double>::operator-(const Vector& v) const
@@ -107,9 +114,25 @@ int Vector<double>::search_index_vector_in_array_of_name(const std::vector<Vecto
 
 void SetCordinatesVector(Vector<double>& v, double new_x, double new_y, double new_z)
 {
-	v.x = new_x;
-	v.y = new_y;
-	v.z = new_z;
+	if ( (!new_x and !new_y) or (!new_x and !new_z) or (!new_y and !new_z) )
+	{
+		BazisVector* v_pr = static_cast<BazisVector*>(&v);
+		if (new_x)
+		{
+			v_pr->SetAxis('x');
+		}
+		if (new_y)
+		{
+			v_pr->SetAxis('y');
+		}
+		if (new_z)
+		{
+			v_pr->SetAxis('z');
+		}
+	}
+		v.x = new_x;
+		v.y = new_y;
+		v.z = new_z;
 }
 
 void SetCordinatesVector(Vector<double>& v_1, Vector<double>& v_2)
@@ -143,6 +166,11 @@ BazisVector::BazisVector(char input_name_vector, double len, char axis):Vector(i
 char BazisVector::GetAxis() const
 {
 	return axis;
+}
+
+void BazisVector::SetAxis(char new_axis)
+{
+	axis = new_axis;
 }
 
 Vector<double> BazisVector::Sum(const Vector& v) const
