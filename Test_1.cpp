@@ -84,6 +84,7 @@ int main()
 					continue;
 				}
 				}
+				continue;
 			case '2':
 				print_menu_item(choice);
 				if (not(check_vectors_count(1)))
@@ -93,13 +94,21 @@ int main()
 				}
 				else
 				{
-					char name_search;
-					int i_src;
-					cout << "Введите имя интересующего вектора:\n";
-					cin >> name_search;
-					i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name_search);
-					Vector<double> vector_search = *vectors[i_src];
-					cout << "Координаты вектора " << name_search << " = " << vector_search;
+					try 
+					{
+						char name_search;
+						int i_src;
+						cout << "Введите имя интересующего вектора:\n";
+						cin >> name_search;
+						i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name_search);
+						Vector<double> vector_search = *vectors[i_src];
+						cout << "Координаты вектора " << name_search << " = " << vector_search;
+					}
+					catch (const string& error_message) 
+					{
+						cout << error_message << "\n";
+						continue;
+					}
 				}
 				continue;
 			case '3':
@@ -111,19 +120,27 @@ int main()
 				}
 				else
 				{
-					char name_1, name_2;
-					int i_1, i_2;
-					cout << "Введите имена суммируемых векторов:\n";
-					cin >> name_1 >> name_2;
-					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-					Vector<double>* vector_1 = vectors[i_1];
-					Vector<double>* vector_2 = vectors[i_2];
-					cout << "Выполняется сложение следующих векторов:\n";
-					cout << name_1 << " = " << *vector_1;
-					cout << name_2 << " = " << *vector_2;
-					Vector result = vector_1->Sum(*vector_2);
-					cout << name_1 << " + " << name_2 << " = " << result;
+					try
+					{
+						char name_1, name_2;
+						int i_1, i_2;
+						cout << "Введите имена суммируемых векторов:\n";
+						cin >> name_1 >> name_2;
+						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+						Vector<double>* vector_1 = vectors[i_1];
+						Vector<double>* vector_2 = vectors[i_2];
+						cout << "Выполняется сложение следующих векторов:\n";
+						cout << name_1 << " = " << *vector_1;
+						cout << name_2 << " = " << *vector_2;
+						Vector result = vector_1->Sum(*vector_2);
+						cout << name_1 << " + " << name_2 << " = " << result;
+					}
+					catch (const string& error_message)
+					{
+						cout << error_message << "\n";
+						continue;
+					}
 				}
 				continue;
 			case '4':
@@ -135,21 +152,29 @@ int main()
 				}
 				else
 				{
-					char name_1, name_2;
-					int i_1, i_2;
-					cout << "Введите имя уменьшаемого вектора:\n";
-					cin >> name_1;
-					cout << "Введите имя вычитаемого вектора:\n";
-					cin >> name_2;
-					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-					Vector<double>* vector_1 = vectors[i_1];
-					Vector<double>* vector_2 = vectors[i_2];
-					cout << "Выполняется вычитание следующих векторов:\n";
-					cout << name_1 << " = " << *vector_1;
-					cout << name_2 << " = " << *vector_2;
-					Vector<double> result = *vector_1 - *vector_2;
-					cout << name_1 << " - " << name_2 << " = " << result;
+					try
+					{
+						char name_1, name_2;
+						int i_1, i_2;
+						cout << "Введите имя уменьшаемого вектора:\n";
+						cin >> name_1;
+						cout << "Введите имя вычитаемого вектора:\n";
+						cin >> name_2;
+						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+						Vector<double>* vector_1 = vectors[i_1];
+						Vector<double>* vector_2 = vectors[i_2];
+						cout << "Выполняется вычитание следующих векторов:\n";
+						cout << name_1 << " = " << *vector_1;
+						cout << name_2 << " = " << *vector_2;
+						Vector<double> result = *vector_1 - *vector_2;
+						cout << name_1 << " - " << name_2 << " = " << result;
+					}
+					catch (const string& error_message)
+					{
+						cout << error_message << "\n";
+						continue;
+					}
 				}
 				continue;
 			case '5':
@@ -161,19 +186,27 @@ int main()
 				}
 				else
 				{
-					char name_1, name_2;
-					cout << "Введите имена перемножаемых векторов:\n";
-					cin >> name_1 >> name_2;
-					int i_1, i_2;
-					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-					Vector<double>* vector_1 = vectors[i_1];
-					Vector<double>* vector_2 = vectors[i_2];
-					cout << "Вычисляется скалярное произведение следующих векторов:\n";
-					cout << name_1 << " = " << *vector_1;
-					cout << name_2 << " = " << *vector_2;
-					double result = (*vector_1) * (*vector_2);
-					cout << name_1 << " * " << name_2 << " = " << result << "\n";
+					try
+					{
+						char name_1, name_2;
+						cout << "Введите имена перемножаемых векторов:\n";
+						cin >> name_1 >> name_2;
+						int i_1, i_2;
+						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+						Vector<double>* vector_1 = vectors[i_1];
+						Vector<double>* vector_2 = vectors[i_2];
+						cout << "Вычисляется скалярное произведение следующих векторов:\n";
+						cout << name_1 << " = " << *vector_1;
+						cout << name_2 << " = " << *vector_2;
+						double result = (*vector_1) * (*vector_2);
+						cout << name_1 << " * " << name_2 << " = " << result << "\n";
+					}
+					catch (const string& error_message)
+					{
+						cout << error_message << "\n";
+						continue;
+					}
 				}
 				continue;
 			case '6':
@@ -185,20 +218,28 @@ int main()
 				}
 				else
 				{
-					char name_1, name_2;
-					cout << "Введите имена интересующих векторов:\n";
-					cin >> name_1 >> name_2;
-					int i_1, i_2;
-					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-					Vector<double>* vector_1 = vectors[i_1];
-					Vector<double>* vector_2 = vectors[i_2];
-					cout << "Вычисляется косинус угла между следующими векторами:\n";
-					cout << name_1 << " = " << vector_1;
-					cout << name_2 << " = " << vector_2;
-					double result = (*vector_1).CosVectors(*vector_2);
-					cout << "Cos = " << result << "\n";
-					continue;
+					try
+					{
+						char name_1, name_2;
+						cout << "Введите имена интересующих векторов:\n";
+						cin >> name_1 >> name_2;
+						int i_1, i_2;
+						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+						Vector<double>* vector_1 = vectors[i_1];
+						Vector<double>* vector_2 = vectors[i_2];
+						cout << "Вычисляется косинус угла между следующими векторами:\n";
+						cout << name_1 << " = " << vector_1;
+						cout << name_2 << " = " << vector_2;
+						double result = (*vector_1).CosVectors(*vector_2);
+						cout << "Cos = " << result << "\n";
+						continue;
+					}
+					catch (const string& error_message)
+					{
+						cout << error_message << "\n";
+						continue;
+					}
 				}
 			case '7':
 				print_menu_item(choice);
@@ -221,16 +262,24 @@ int main()
 						continue;
 					case '1':
 					{
-						double new_x, new_y, new_z;
-						cout << "Введите имя вектора, координаты которого требуется сменить:\n";
-						cin >> name;
-						int i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-						Vector<double>* vector_searched = vectors[i_src];
-						cout << "Введите новые координаты X, Y, Z для вектора:\n";
-						cin >> new_x >> new_y >> new_z;
-						SetCordinatesVector(*vector_searched, new_x, new_y, new_z);
-						cout << "Координаты вектора " << name << " изменены на " << *vector_searched;
-						continue;
+						try
+						{
+							double new_x, new_y, new_z;
+							cout << "Введите имя вектора, координаты которого требуется сменить:\n";
+							cin >> name;
+							int i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+							Vector<double>* vector_searched = vectors[i_src];
+							cout << "Введите новые координаты X, Y, Z для вектора:\n";
+							cin >> new_x >> new_y >> new_z;
+							SetCordinatesVector(*vector_searched, new_x, new_y, new_z);
+							cout << "Координаты вектора " << name << " изменены на " << *vector_searched;
+							continue;
+						}
+						catch (const string& error_message)
+						{
+							cout << error_message << "\n";
+							continue;
+						}
 					}
 					case '2':
 					{
@@ -241,18 +290,26 @@ int main()
 						}
 						else
 						{
-							char name_2;
-							cout << "Введите имя вектора, координаты которого требуется сменить:\n";
-							cin >> name;
-							int i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-							Vector<double>* vector_searched_1 = vectors[i_1];
-							cout << "Введите имя вектора, координаты которого заимствуются:\n";
-							cin >> name_2;
-							int i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-							Vector<double>* vector_searched_2 = vectors[i_2];
-							SetCordinatesVector(*vector_searched_1, *vector_searched_2);
-							cout << "Координаты вектора " << name << " изменены на " << *vector_searched_2;
-							continue;
+							try
+							{
+								char name_2;
+								cout << "Введите имя вектора, координаты которого требуется сменить:\n";
+								cin >> name;
+								int i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+								Vector<double>* vector_searched_1 = vectors[i_1];
+								cout << "Введите имя вектора, координаты которого заимствуются:\n";
+								cin >> name_2;
+								int i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+								Vector<double>* vector_searched_2 = vectors[i_2];
+								SetCordinatesVector(*vector_searched_1, *vector_searched_2);
+								cout << "Координаты вектора " << name << " изменены на " << *vector_searched_2;
+								continue;
+							}
+							catch (const string& error_message)
+							{
+								cout << error_message << "\n";
+								continue;
+							}
 						}
 					}
 					}

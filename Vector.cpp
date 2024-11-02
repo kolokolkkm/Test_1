@@ -94,18 +94,15 @@ Vector<double> Vector<double>::operator-(const Vector& v) const
 
 int Vector<double>::search_index_vector_in_array_of_name(const std::vector<Vector<double>*>& vectors, char name_vector)
 {
-	int searched = -1;
 	for (int i = 0; i < vectors.size(); i++)
 	{
 		if (vectors[i]->GetNameVector() == name_vector)
 		{
 			return i;
-			searched = 0;
 			break;
 		}
 	}
-	if (searched == -1)
-		return searched;
+	throw std::string{ "Не был найден нужный вектор!" };
 }
 
 void SetCordinatesVector(Vector<double>& v, double new_x, double new_y, double new_z)
