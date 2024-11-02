@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Vector.h"
 #include <vector>
+#include <Windows.h>
+
 using namespace std;
 
 std::ostream& operator<<(std::ostream& stream, const Vector<double>& v)
@@ -26,6 +28,7 @@ int main()
 	char choice;
 	bool close = false;
 	setlocale(LC_ALL, "RU");
+	SetConsoleCP(1251);
 	std::vector<Vector<double>*> vectors;
 	while (close == false) 
 	{
