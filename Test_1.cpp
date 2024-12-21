@@ -5,13 +5,14 @@
 
 using namespace std;
 
-std::ostream& operator<<(std::ostream& stream, const Vector<double>& v)
+std::ostream &operator<<(std::ostream &stream, const Vector<double> &v)
 {
 	stream << "{" << v.GetX() << ", " << v.GetY() << ", " << v.GetZ() << "}\n";
 	return stream;
 }
 
-void print_menu_item(char item) {
+void print_menu_item(char item)
+{
 	cout << "Выбран " << item << " пункт меню\n";
 }
 
@@ -29,8 +30,8 @@ int main()
 	bool close = false;
 	setlocale(LC_ALL, "RU");
 	SetConsoleCP(1251);
-	std::vector<Vector<double>*> vectors;
-	while (close == false) 
+	std::vector<Vector<double> *> vectors;
+	while (close == false)
 	{
 		cout << "Выберите действие:\n";
 		cout << "1. Создать вектор;\n";
@@ -47,294 +48,295 @@ int main()
 		default:
 			cout << "Введеные данные не соответствуют пунктам меню!\n";
 			continue;
+		case '1':
+			print_menu_item(choice);
+			char choice_1;
+			cout << "Выберите, какой вектор создать:\n";
+			cout << "1. Обычный;\n";
+			cout << "2. Базисный:\n";
+			cin >> choice_1;
+			switch (choice_1)
+			{
+			default:
+				break;
 			case '1':
-				print_menu_item(choice);
-				char choice_1;
-				cout << "Выберите, какой вектор создать:\n";
-				cout << "1. Обычный;\n";
-				cout << "2. Базисный:\n";
-				cin >> choice_1;
-				switch (choice_1)
+			{
+				char name_vector_1;
+				double x, y, z;
+				cout << "Введите имя будущего вектора:\n";
+				cin >> name_vector_1;
+				cout << "Введите координаты X, Y, Z для будущего вектора\n";
+				cin >> x >> y >> z;
+				Vector v_add = Vector{name_vector_1, x, y, z};
+				vectors.push_back(&v_add);
+				cout << "Вектор " << name_vector_1 << " = {" << x << ", " << y << ", " << z << "} создан!\n";
+				continue;
+			}
+			case '2':
+			{
+				char name_vector_2, axis;
+				double len;
+				cout << "Введите имя будущего вектора:\n";
+				cin >> name_vector_2;
+				cout << "Введите длину вектора:\n";
+				cin >> len;
+				cout << "Введите ось вектора:\n";
+				cin >> axis;
+				BazisVector bv_add = BazisVector{name_vector_2, len, axis};
+				vectors.push_back(&bv_add);
+				cout << "Создан базисный вектор " << name_vector_2 << " = " << bv_add;
+				continue;
+			}
+			}
+			continue;
+		case '2':
+			print_menu_item(choice);
+			if (not(check_vectors_count(1)))
+			{
+				cout << "Нет созданных векторов!\n";
+				continue;
+			}
+			else
+			{
+				try
+				{
+					char name_search;
+					int i_src;
+					cout << "Введите имя интересующего вектора:\n";
+					cin >> name_search;
+					i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name_search);
+					Vector<double> vector_search = *vectors[i_src];
+					cout << "Координаты вектора " << name_search << " = " << vector_search;
+				}
+				catch (const string &error_message)
+				{
+					cout << error_message << "\n";
+					continue;
+				}
+			}
+			continue;
+		case '3':
+			print_menu_item(choice);
+			if (not(check_vectors_count(2)))
+			{
+				cout << "Недостаточно создано векторов для проведения операции!\n";
+				continue;
+			}
+			else
+			{
+				try
+				{
+					char name_1, name_2;
+					int i_1, i_2;
+					cout << "Введите имена суммируемых векторов:\n";
+					cin >> name_1 >> name_2;
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double> *vector_1 = vectors[i_1];
+					Vector<double> *vector_2 = vectors[i_2];
+					cout << "Выполняется сложение следующих векторов:\n";
+					cout << name_1 << " = " << *vector_1;
+					cout << name_2 << " = " << *vector_2;
+					Vector result = vector_1->Sum(*vector_2);
+					cout << name_1 << " + " << name_2 << " = " << result;
+				}
+				catch (const string &error_message)
+				{
+					cout << error_message << "\n";
+					continue;
+				}
+			}
+			continue;
+		case '4':
+			print_menu_item(choice);
+			if (not(check_vectors_count(2)))
+			{
+				cout << "Недостаточно создано векторов для проведения операции!\n";
+				continue;
+			}
+			else
+			{
+				try
+				{
+					char name_1, name_2;
+					int i_1, i_2;
+					cout << "Введите имя уменьшаемого вектора:\n";
+					cin >> name_1;
+					cout << "Введите имя вычитаемого вектора:\n";
+					cin >> name_2;
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double> *vector_1 = vectors[i_1];
+					Vector<double> *vector_2 = vectors[i_2];
+					cout << "Выполняется вычитание следующих векторов:\n";
+					cout << name_1 << " = " << *vector_1;
+					cout << name_2 << " = " << *vector_2;
+					Vector<double> result = *vector_1 - *vector_2;
+					cout << name_1 << " - " << name_2 << " = " << result;
+				}
+				catch (const string &error_message)
+				{
+					cout << error_message << "\n";
+					continue;
+				}
+			}
+			continue;
+		case '5':
+			print_menu_item(choice);
+			if (not(check_vectors_count(2)))
+			{
+				cout << "Недостаточно создано векторов для проведения операции!\n";
+				continue;
+			}
+			else
+			{
+				try
+				{
+					char name_1, name_2;
+					cout << "Введите имена перемножаемых векторов:\n";
+					cin >> name_1 >> name_2;
+					int i_1, i_2;
+					double result;
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double> *vector_1 = vectors[i_1];
+					Vector<double> *vector_2 = vectors[i_2];
+					if (!vector_2->LenVector())
+					{
+						result = ((*vector_1) * 0).LenVector();
+					}
+					else if (!vector_2->LenVector())
+					{
+						result = ((*vector_2) * 0).LenVector();
+					}
+					else
+					{
+						cout << "Вычисляется скалярное произведение следующих векторов:\n";
+						cout << name_1 << " = " << *vector_1;
+						cout << name_2 << " = " << *vector_2;
+						result = (*vector_1) * (*vector_2);
+						cout << name_1 << " * " << name_2 << " = " << result << "\n";
+					}
+				}
+				catch (const string &error_message)
+				{
+					cout << error_message << "\n";
+					continue;
+				}
+			}
+			continue;
+		case '6':
+			print_menu_item(choice);
+			if (not(check_vectors_count(2)))
+			{
+				cout << "Недостаточно создано векторов для проведения операции!\n";
+				continue;
+			}
+			else
+			{
+				try
+				{
+					char name_1, name_2;
+					cout << "Введите имена интересующих векторов:\n";
+					cin >> name_1 >> name_2;
+					int i_1, i_2;
+					i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
+					i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
+					Vector<double> *vector_1 = vectors[i_1];
+					Vector<double> *vector_2 = vectors[i_2];
+					cout << "Вычисляется косинус угла между следующими векторами:\n";
+					cout << name_1 << " = " << vector_1;
+					cout << name_2 << " = " << vector_2;
+					double result = (*vector_1).CosVectors(*vector_2);
+					cout << "Cos = " << result << "\n";
+					continue;
+				}
+				catch (const string &error_message)
+				{
+					cout << error_message << "\n";
+					continue;
+				}
+			}
+		case '7':
+			print_menu_item(choice);
+			if (not(check_vectors_count(1)))
+			{
+				cout << "Нет созданных векторов!\n";
+				continue;
+			}
+			else
+			{
+				char choice_set, name;
+				;
+				cout << "Как сменить координаты?\n";
+				cout << "1. Ввести координаты самостоятельно;\n";
+				cout << "2. Позаимствовать координаты другого вектора.\n";
+				cin >> choice_set;
+				switch (choice_set)
 				{
 				default:
-					break;
+					cout << "Введеные данные не соответствуют пунктам меню!\n";
+					continue;
 				case '1':
 				{
-					char name_vector_1;
-					double x, y, z;
-					cout << "Введите имя будущего вектора:\n";
-					cin >> name_vector_1;
-					cout << "Введите координаты X, Y, Z для будущего вектора\n";
-					cin >> x >> y >> z;
-					Vector v_add = Vector{ name_vector_1, x, y, z };
-					vectors.push_back(&v_add);
-					cout << "Вектор " << name_vector_1 << " = {" << x << ", " << y << ", " << z << "} создан!\n";
-					continue;
+					try
+					{
+						double new_x, new_y, new_z;
+						cout << "Введите имя вектора, координаты которого требуется сменить:\n";
+						cin >> name;
+						int i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+						Vector<double> *vector_searched = vectors[i_src];
+						cout << "Введите новые координаты X, Y, Z для вектора:\n";
+						cin >> new_x >> new_y >> new_z;
+						SetCordinatesVector(*vector_searched, new_x, new_y, new_z);
+						cout << "Координаты вектора " << name << " изменены на " << *vector_searched;
+						continue;
+					}
+					catch (const string &error_message)
+					{
+						cout << error_message << "\n";
+						continue;
+					}
 				}
 				case '2':
 				{
-					char name_vector_2, axis;
-					double len;
-					cout << "Введите имя будущего вектора:\n";
-					cin >> name_vector_2;
-					cout << "Введите длину вектора:\n";
-					cin >> len;
-					cout << "Введите ось вектора:\n";
-					cin >> axis;
-					BazisVector bv_add = BazisVector{ name_vector_2, len, axis };
-					vectors.push_back(&bv_add);
-					cout << "Создан базисный вектор " << name_vector_2 << " = " << bv_add;
-					continue;
-				}
-				}
-				continue;
-			case '2':
-				print_menu_item(choice);
-				if (not(check_vectors_count(1)))
-				{
-					cout << "Нет созданных векторов!\n";
-					continue;
-				}
-				else
-				{
-					try 
+					if (not(check_vectors_count(2)))
 					{
-						char name_search;
-						int i_src;
-						cout << "Введите имя интересующего вектора:\n";
-						cin >> name_search;
-						i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name_search);
-						Vector<double> vector_search = *vectors[i_src];
-						cout << "Координаты вектора " << name_search << " = " << vector_search;
-					}
-					catch (const string& error_message) 
-					{
-						cout << error_message << "\n";
+						cout << "Недостаточно создано векторов для проведения операции!\n";
 						continue;
 					}
-				}
-				continue;
-			case '3':
-				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
-				{
-					cout << "Недостаточно создано векторов для проведения операции!\n";
-					continue;
-				}
-				else
-				{
-					try
-					{
-						char name_1, name_2;
-						int i_1, i_2;
-						cout << "Введите имена суммируемых векторов:\n";
-						cin >> name_1 >> name_2;
-						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-						Vector<double>* vector_1 = vectors[i_1];
-						Vector<double>* vector_2 = vectors[i_2];
-						cout << "Выполняется сложение следующих векторов:\n";
-						cout << name_1 << " = " << *vector_1;
-						cout << name_2 << " = " << *vector_2;
-						Vector result = vector_1->Sum(*vector_2);
-						cout << name_1 << " + " << name_2 << " = " << result;
-					}
-					catch (const string& error_message)
-					{
-						cout << error_message << "\n";
-						continue;
-					}
-				}
-				continue;
-			case '4':
-				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
-				{
-					cout << "Недостаточно создано векторов для проведения операции!\n";
-					continue;
-				}
-				else
-				{
-					try
-					{
-						char name_1, name_2;
-						int i_1, i_2;
-						cout << "Введите имя уменьшаемого вектора:\n";
-						cin >> name_1;
-						cout << "Введите имя вычитаемого вектора:\n";
-						cin >> name_2;
-						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-						Vector<double>* vector_1 = vectors[i_1];
-						Vector<double>* vector_2 = vectors[i_2];
-						cout << "Выполняется вычитание следующих векторов:\n";
-						cout << name_1 << " = " << *vector_1;
-						cout << name_2 << " = " << *vector_2;
-						Vector<double> result = *vector_1 - *vector_2;
-						cout << name_1 << " - " << name_2 << " = " << result;
-					}
-					catch (const string& error_message)
-					{
-						cout << error_message << "\n";
-						continue;
-					}
-				}
-				continue;
-			case '5':
-				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
-				{
-					cout << "Недостаточно создано векторов для проведения операции!\n";
-					continue;
-				}
-				else
-				{
-					try
-					{
-						char name_1, name_2;
-						cout << "Введите имена перемножаемых векторов:\n";
-						cin >> name_1 >> name_2;
-						int i_1, i_2;
-						double result;
-						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-						Vector<double>* vector_1 = vectors[i_1];
-						Vector<double>* vector_2 = vectors[i_2];
-						if (!vector_2->LenVector()) 
-						{
-							result = ((*vector_1) * 0).LenVector();
-						}
-						else if (!vector_2->LenVector())
-						{
-							result = ((*vector_2) * 0).LenVector();
-						}
-						else
-						{
-							cout << "Вычисляется скалярное произведение следующих векторов:\n";
-							cout << name_1 << " = " << *vector_1;
-							cout << name_2 << " = " << *vector_2;
-							result = (*vector_1) * (*vector_2);
-							cout << name_1 << " * " << name_2 << " = " << result << "\n";
-						}
-					}
-					catch (const string& error_message)
-					{
-						cout << error_message << "\n";
-						continue;
-					}
-				}
-				continue;
-			case '6':
-				print_menu_item(choice);
-				if (not(check_vectors_count(2)))
-				{
-					cout << "Недостаточно создано векторов для проведения операции!\n";
-					continue;
-				}
-				else
-				{
-					try
-					{
-						char name_1, name_2;
-						cout << "Введите имена интересующих векторов:\n";
-						cin >> name_1 >> name_2;
-						int i_1, i_2;
-						i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_1);
-						i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name_2);
-						Vector<double>* vector_1 = vectors[i_1];
-						Vector<double>* vector_2 = vectors[i_2];
-						cout << "Вычисляется косинус угла между следующими векторами:\n";
-						cout << name_1 << " = " << vector_1;
-						cout << name_2 << " = " << vector_2;
-						double result = (*vector_1).CosVectors(*vector_2);
-						cout << "Cos = " << result << "\n";
-						continue;
-					}
-					catch (const string& error_message)
-					{
-						cout << error_message << "\n";
-						continue;
-					}
-				}
-			case '7':
-				print_menu_item(choice);
-				if (not(check_vectors_count(1)))
-				{
-					cout << "Нет созданных векторов!\n";
-					continue;
-				}
-				else
-				{
-					char choice_set, name;;
-					cout << "Как сменить координаты?\n";
-					cout << "1. Ввести координаты самостоятельно;\n";
-					cout << "2. Позаимствовать координаты другого вектора.\n";
-					cin >> choice_set;
-					switch (choice_set)
-					{
-					default:
-						cout << "Введеные данные не соответствуют пунктам меню!\n";
-						continue;
-					case '1':
+					else
 					{
 						try
 						{
-							double new_x, new_y, new_z;
+							char name_2;
 							cout << "Введите имя вектора, координаты которого требуется сменить:\n";
 							cin >> name;
-							int i_src = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-							Vector<double>* vector_searched = vectors[i_src];
-							cout << "Введите новые координаты X, Y, Z для вектора:\n";
-							cin >> new_x >> new_y >> new_z;
-							SetCordinatesVector(*vector_searched, new_x, new_y, new_z);
-							cout << "Координаты вектора " << name << " изменены на " << *vector_searched;
+							int i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+							Vector<double> *vector_searched_1 = static_cast<Vector<double> *>(vectors[i_1]);
+							cout << "Введите имя вектора, координаты которого заимствуются:\n";
+							cin >> name_2;
+							int i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
+							Vector<double> *vector_searched_2 = static_cast<Vector<double> *>(vectors[i_2]);
+							SetCordinatesVector(*vector_searched_1, *vector_searched_2);
+							cout << "Координаты вектора " << name << " изменены на " << *vector_searched_2;
 							continue;
 						}
-						catch (const string& error_message)
+						catch (const string &error_message)
 						{
 							cout << error_message << "\n";
 							continue;
 						}
 					}
-					case '2':
-					{
-						if (not(check_vectors_count(2)))
-						{
-							cout << "Недостаточно создано векторов для проведения операции!\n";
-							continue;
-						}
-						else
-						{
-							try
-							{
-								char name_2;
-								cout << "Введите имя вектора, координаты которого требуется сменить:\n";
-								cin >> name;
-								int i_1 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-								Vector<double>* vector_searched_1 = static_cast<Vector<double>*>(vectors[i_1]);
-								cout << "Введите имя вектора, координаты которого заимствуются:\n";
-								cin >> name_2;
-								int i_2 = Vector<double>::search_index_vector_in_array_of_name(vectors, name);
-								Vector<double>* vector_searched_2 = static_cast<Vector<double>*>(vectors[i_2]);
-								SetCordinatesVector(*vector_searched_1, *vector_searched_2);
-								cout << "Координаты вектора " << name << " изменены на " << *vector_searched_2;
-								continue;
-							}
-							catch (const string& error_message) 
-					{
-						cout << error_message << "\n";
-						continue;
-					}
-						}
-					}
-					}
 				}
-				continue;
-			case '8':
-				print_menu_item(choice);
-				cout << "Осуществляется выход из программы...";
-				close = true;
-				continue;
+				}
+			}
+			continue;
+		case '8':
+			print_menu_item(choice);
+			cout << "Осуществляется выход из программы...";
+			close = true;
+			continue;
 		}
 	}
 }
